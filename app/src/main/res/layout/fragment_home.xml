@@ -20,7 +20,13 @@
         android:id="@+id/recyclerViewTask"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,4 +35,14 @@
         android:background="#4280EF"
         android:textColor="@color/white"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_all"
+        android:id="@+id/clearAll"
+        android:background="#FF0000"
+        android:textColor="@color/white"
+        android:layout_marginStart="240dp"
+        />
+    </LinearLayout>
 </LinearLayout>

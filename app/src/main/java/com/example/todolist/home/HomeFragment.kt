@@ -1,6 +1,7 @@
 package com.example.todolist.home
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.base.BaseFragment
 import com.example.todolist.data.Task
@@ -22,13 +23,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             LinearLayoutManager(requireContext())
 
         binding.addButton.setOnClickListener {
-            val task = Task(
-                id = 0,
-                title = "Sample Task",
-                tags = "android,kotlin",
-                description = "Test description"
-            )
-            viewModel.insert(task)
+            findNavController().navigate(R.id.)
+//            val task = Task(
+//                id = 0,
+//                title = "Sample",
+//                tags = "android,kotlin",
+//                description = "Test description"
+//            )
+//            viewModel.insert(task)
+        }
+        binding.clearAll.setOnClickListener {
+            viewModel.clearAll()
         }
     }
 

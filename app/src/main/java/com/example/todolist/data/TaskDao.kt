@@ -13,4 +13,6 @@ interface TaskDao {
     fun getAllTasks(): Flow<List<Task>>
     @Query("SELECT * FROM tasks WHERE title LIKE '%' || :query || '%' OR tags like '%' || :query || '%'")
     fun searchTasks(query:String):Flow<List<Task>>
+    @Query("DELETE FROM Tasks")
+    suspend fun deleteAllTasks()
 }

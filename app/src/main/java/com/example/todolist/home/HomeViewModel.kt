@@ -19,4 +19,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             repository.insert(task)
         }
     }
+    fun clearAll(){
+        viewModelScope.launch{
+            dao.deleteAllTasks()
+        }
+    }
 }

@@ -16,5 +16,8 @@
         android:id="@+id/detail_fragment"
         android:name="com.example.todolist.detail.DetailFragment"
         android:label="Detail" />
-
+<fragment
+    android:id="@+id/add_fragment"
+    android:name="com.example.todolist.add_task.AddTaskFragment"
+    />
 </navigation>
