@@ -16,15 +16,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(
     private val viewModel: DetailViewModel by viewModels()
 
     override fun setupViews() {
-        TODO("Not yet implemented")
+
     }
 
     override fun observeViewModel() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onClick(viewId: Int) {
-        TODO("Not yet implemented")
+
     }
 
 

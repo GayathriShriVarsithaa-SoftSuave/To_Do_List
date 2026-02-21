@@ -25,4 +25,11 @@
         android:hint="@string/enter_description"
         android:inputType="text"
         android:autofillHints="none"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:id="@+id/addBtn"
+        android:background="#4280EF"
+        android:textColor="@color/white"/>
 </LinearLayout>

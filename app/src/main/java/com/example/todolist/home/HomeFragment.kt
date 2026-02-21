@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.base.BaseFragment
 import com.example.todolist.data.Task
 import com.example.todolist.databinding.FragmentHomeBinding
-
+import com.example.todolist.R
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
 ) {
@@ -23,7 +23,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             LinearLayoutManager(requireContext())
 
         binding.addButton.setOnClickListener {
-            findNavController().navigate(R.id.)
+            findNavController().navigate(R.id.home_To_add)
 //            val task = Task(
 //                id = 0,
 //                title = "Sample",
