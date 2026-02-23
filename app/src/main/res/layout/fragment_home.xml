@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <!--<androidx.appcompat.widget.SearchView-->
-    <!--    android:layout_width="wrap_content"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:queryHint="Search by tags or title"-->
-    <!--    android:id="@+id/searchBar"/>-->
+    android:orientation="vertical"
+    android:padding="12dp">
+
     <AutoCompleteTextView
         android:id="@+id/autoCompleteSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="8dp"
         android:hint="@string/search_by_tags_or_title"
         android:completionThreshold="1"/>
 
@@ -21,28 +19,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"/>
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:id="@+id/addButton"
-        android:background="#4280EF"
-        android:textColor="@color/white"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/clear_all"
-        android:id="@+id/clearAll"
-        android:background="#FF0000"
-        android:textColor="@color/white"
-        android:layout_marginStart="240dp"
-        />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/add"
+            android:background="#4280EF"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/clearAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/clear_all"
+            android:background="#FF0000"
+            android:textColor="@color/white"/>
+
     </LinearLayout>
+
 </LinearLayout>

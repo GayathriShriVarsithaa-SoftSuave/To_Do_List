@@ -18,7 +18,11 @@
     <fragment
         android:id="@+id/detail_fragment"
         android:name="com.example.todolist.detail.DetailFragment"
-        android:label="Detail" />
+        android:label="Detail">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 <fragment
     android:id="@+id/add_fragment"
     android:name="com.example.todolist.add_task.AddTaskFragment"

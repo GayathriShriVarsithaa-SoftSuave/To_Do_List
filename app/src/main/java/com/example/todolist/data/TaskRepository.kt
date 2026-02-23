@@ -11,5 +11,14 @@ class TaskRepository(private val taskDao: TaskDao){
     fun searchTasks(query: String):Flow<List<Task>>{
         return taskDao.searchTasks(query)
     }
+    suspend fun delete(task: Task) {
+        taskDao.delete(task)
+    }
+    fun getTaskById(id: Int): Flow<Task> {
+        return taskDao.getTaskById(id)
+    }
+    suspend fun clearAll() {
+        taskDao.deleteAllTasks()
+    }
 
 }

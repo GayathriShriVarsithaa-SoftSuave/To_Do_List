@@ -1,6 +1,7 @@
 package com.example.todolist.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,12 @@ interface TaskDao {
     fun getAllTasks(): Flow<List<Task>>
     @Query("SELECT * FROM tasks WHERE title LIKE '%' || :query || '%' OR tags like '%' || :query || '%'")
     fun searchTasks(query:String):Flow<List<Task>>
-    @Query("DELETE FROM Tasks")
+    @Query("DELETE FROM tasks")
     suspend fun deleteAllTasks()
+
+    @Delete
+    suspend fun delete(task: Task)
+
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    fun getTaskById(id: Int): Flow<Task>
 }

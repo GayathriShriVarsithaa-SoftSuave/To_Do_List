@@ -14,14 +14,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val allTasks = repository.allTasks.asLiveData()
 
-    fun insert(task: Task) {
+    fun clearAll(){
         viewModelScope.launch {
-            repository.insert(task)
+            repository.clearAll()
         }
     }
-    fun clearAll(){
-        viewModelScope.launch{
-            dao.deleteAllTasks()
+    fun delete(task: Task) {
+        viewModelScope.launch {
+            repository.delete(task)
         }
     }
 }

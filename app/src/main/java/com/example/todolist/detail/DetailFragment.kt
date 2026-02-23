@@ -1,19 +1,16 @@
 package com.example.todolist.detail
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.todolist.R
+import androidx.navigation.fragment.navArgs
 import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentDetailBinding
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(
     FragmentDetailBinding::inflate
 ) {
+
     private val viewModel: DetailViewModel by viewModels()
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun setupViews() {
 
@@ -21,11 +18,17 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(
 
     override fun observeViewModel() {
 
+        viewModel.getTask(args.id).observe(viewLifecycleOwner) { task ->
+
+            task?.let {
+                binding.titleText.text = it.title
+                binding.tagsText.text = "Tags: ${it.tags}"
+                binding.descriptionText.text = it.description
+            }
+        }
     }
 
     override fun onClick(viewId: Int) {
 
     }
-
-
 }

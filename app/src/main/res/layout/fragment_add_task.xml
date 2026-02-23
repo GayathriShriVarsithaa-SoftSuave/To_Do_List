@@ -3,33 +3,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_title"
         android:id="@+id/titleEdit"
-        android:inputType="text"
-        android:autofillHints="none"/>
-    <EditText
+        android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_tags"
+        android:layout_marginTop="8dp"
+        android:hint="@string/enter_title"
+        android:inputType="text"
+        android:autofillHints="none" />
+
+    <EditText
         android:id="@+id/tagEdit"
-        android:inputType="text"
-        android:autofillHints="none"/>
-    <EditText
+        android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/descriptionEdit"
-        android:hint="@string/enter_description"
+        android:layout_marginTop="12dp"
+        android:hint="@string/enter_tags"
         android:inputType="text"
-        android:autofillHints="none"/>
+        android:autofillHints="none" />
+
+    <EditText
+        android:id="@+id/descriptionEdit"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/enter_description"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:autofillHints="none" />
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
         android:id="@+id/addBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/add"
         android:background="#4280EF"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
+
 </LinearLayout>

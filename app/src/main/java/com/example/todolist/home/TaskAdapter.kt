@@ -9,7 +9,8 @@ import com.example.todolist.data.Task
 import com.example.todolist.databinding.ItemTaskBinding
 
 class TaskAdapter(
-    private val onItemClick: ((Task) -> Unit)? = null
+    private val onItemClick: ((Task) -> Unit)? = null,
+    private val onDeleteClick: ((Task) -> Unit)? = null
 ) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -30,11 +31,16 @@ class TaskAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: Task) {
+
             binding.textTitle.text = task.title
             binding.textTags.text = task.tags
 
             binding.root.setOnClickListener {
                 onItemClick?.invoke(task)
+            }
+
+            binding.deleteBtn.setOnClickListener {
+                onDeleteClick?.invoke(task)
             }
         }
     }

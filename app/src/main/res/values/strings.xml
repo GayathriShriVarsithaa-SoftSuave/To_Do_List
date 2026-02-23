@@ -13,4 +13,5 @@
     <string name="enter_tags">Enter tags</string>
     <string name="enter_title">Enter title</string>
     <string name="enter_description">Enter description</string>
+    <string name="delete">Delete</string>
 </resources>
