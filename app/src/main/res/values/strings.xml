@@ -14,4 +14,7 @@
     <string name="enter_title">Enter title</string>
     <string name="enter_description">Enter description</string>
     <string name="delete">Delete</string>
+    <string name="urgent">Urgent</string>
+    <string name="work">Work</string>
+    <string name="relax">Relax</string>
 </resources>

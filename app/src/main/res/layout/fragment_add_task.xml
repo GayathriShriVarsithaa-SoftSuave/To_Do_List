@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center">
 
     <EditText
         android:id="@+id/titleEdit"
@@ -14,27 +15,43 @@
         android:layout_marginTop="8dp"
         android:hint="@string/enter_title"
         android:inputType="text"
-        android:autofillHints="none" />
+        android:autofillHints="none"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"/>
+    <LinearLayout
 
-    <EditText
-        android:id="@+id/tagEdit"
-        android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="@string/enter_tags"
-        android:inputType="text"
-        android:autofillHints="none" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/urgent"
+            android:id="@+id/urgentTag"
+            android:background="@color/teal_700"
+            android:textColor="@color/white"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/work"
+            android:background="@color/teal_700"
+            android:textColor="@color/white"
+            android:id="@+id/workTag"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/teal_700"
+            android:text="@string/relax"
+            android:id="@+id/relaxTag"
+            android:layout_weight="1"/>
 
-    <EditText
-        android:id="@+id/descriptionEdit"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="12dp"
-        android:hint="@string/enter_description"
-        android:inputType="textMultiLine"
-        android:gravity="top"
-        android:autofillHints="none" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/addBtn"

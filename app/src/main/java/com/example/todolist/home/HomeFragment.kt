@@ -43,15 +43,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             adapter.submitList(tasks)
         }
         viewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
-            val taskSuggestions = viewModel.allTasks.value?.map { task ->
-                "${task.title} (${task.tags})"
-            } ?: emptyList()
+            val displayList=tasks.map{"${it.title} (${it.tags})"}
+            val taskMap = tasks.associateBy { "${it.title} (${it.tags})" }
             val adapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_dropdown_item_1line,
-                taskSuggestions
+                displayList
             )
             binding.autoCompleteSearch.setAdapter(adapter)
+            binding.autoCompleteSearch.setOnItemClickListener{parent, view, position, id->
+                val selectedStr=parent.getItemAtPosition(position) as String
+                val selectedTask=taskMap[selectedStr]
+                selectedTask?.let {
+                    val action=HomeFragmentDirections.homeToDetail(it.id)
+                    findNavController().navigate(action)
+                }
+                binding.autoCompleteSearch.setText("")
+            }
         }
     }
 
