@@ -1,5 +1,6 @@
 package com.example.todolist.home
 
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +16,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private lateinit var adapter: TaskAdapter
 
     override fun setupViews() {
-        adapter = TaskAdapter()
-
+        adapter = TaskAdapter(
+            onItemClick = { task: Task ->
+                val action = HomeFragmentDirections.homeToDetail(task.id)
+                findNavController().navigate(action)
+            },
+            onDeleteClick = { task: Task ->
+                viewModel.delete(task)
+            }
+        )
         binding.recyclerViewTask.layoutManager =
             LinearLayoutManager(requireContext())
         binding.recyclerViewTask.adapter = adapter
@@ -34,25 +42,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         viewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
             adapter.submitList(tasks)
         }
+        viewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
+            val taskSuggestions = viewModel.allTasks.value?.map { task ->
+                "${task.title} (${task.tags})"
+            } ?: emptyList()
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                taskSuggestions
+            )
+            binding.autoCompleteSearch.setAdapter(adapter)
+        }
     }
 
     override fun onClick(viewId: Int) {
         when (viewId) {
             binding.addButton.id -> {
                 findNavController().navigate(R.id.home_To_add)
-            }
-
-            R.id.recyclerViewTask -> {
-                adapter = TaskAdapter(
-                    onItemClick = { task: Task ->
-                        val action = HomeFragmentDirections.homeToDetail(task.id)
-                        findNavController().navigate(action)
-                    },
-                    onDeleteClick = { task: Task ->
-                        viewModel.delete(task)
-                    }
-                )
-                binding.recyclerViewTask.adapter = adapter
             }
         }
     }

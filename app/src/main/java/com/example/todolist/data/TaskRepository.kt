@@ -8,9 +8,6 @@ class TaskRepository(private val taskDao: TaskDao){
     suspend fun insert(task:Task){
         taskDao.insert(task)
     }
-    fun searchTasks(query: String):Flow<List<Task>>{
-        return taskDao.searchTasks(query)
-    }
     suspend fun delete(task: Task) {
         taskDao.delete(task)
     }
