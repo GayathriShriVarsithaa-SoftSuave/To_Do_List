@@ -8,9 +8,11 @@ import com.example.todolist.data.TaskRepository
 
 class DetailViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val dao = AppDatabase.getDatabase(application).taskDao()
+    private val dao = AppDatabase.getDatabase(application).toDoListDao()
     private val repository = TaskRepository(dao)
 
-    fun getTask(id: Int) =
-        repository.getTaskById(id).asLiveData()
+    fun getTask(id: Int) {
+
+    }
+
 }

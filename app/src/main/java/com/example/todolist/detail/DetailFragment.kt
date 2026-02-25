@@ -18,14 +18,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(
 
     override fun observeViewModel() {
 
-        viewModel.getTask(args.id).observe(viewLifecycleOwner) { task ->
-
-            task?.let {
-                binding.titleText.text = it.title
-                binding.tagsText.text = "Tags: ${it.tags}"
-                binding.descriptionText.text = it.description
-            }
-        }
     }
 
     override fun onClick(viewId: Int) {

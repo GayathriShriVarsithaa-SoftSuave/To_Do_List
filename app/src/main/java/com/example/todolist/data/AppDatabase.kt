@@ -4,10 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Task::class], version = 1)
+@Database(
+    entities = [Task::class,
+        Tag::class,
+        ToDoListTable::class], version = 3
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
+    abstract fun tagDao(): TagDao
+    abstract fun toDoListDao(): ToDoListDao
+
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -17,7 +25,16 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "task_database"
-                ).build()
+                )
+                    .addCallback(object : RoomDatabase.Callback() {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            db.execSQL("INSERT INTO tags (tag) VALUES ('Urgent')")
+                            db.execSQL("INSERT INTO tags (tag) VALUES ('Work')")
+                            db.execSQL("INSERT INTO tags (tag) VALUES ('Relax')")
+                        }
+                    })
+                    .build()
                 INSTANCE = instance
                 instance
             }

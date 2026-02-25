@@ -29,14 +29,14 @@
             android:layout_height="wrap_content"
             android:text="@string/urgent"
             android:id="@+id/urgentTag"
-            android:background="@color/teal_700"
+            android:background="@drawable/selected_tag"
             android:textColor="@color/white"
             android:layout_weight="1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/work"
-            android:background="@color/teal_700"
+            android:background="@drawable/selected_tag"
             android:textColor="@color/white"
             android:id="@+id/workTag"
             android:layout_weight="1"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:background="@color/teal_700"
+            android:background="@drawable/selected_tag"
             android:text="@string/relax"
             android:id="@+id/relaxTag"
             android:layout_weight="1"/>

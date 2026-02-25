@@ -3,14 +3,17 @@ package com.example.todolist.add_task
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.todolist.data.AppDatabase
+import com.example.todolist.data.Tag
 import com.example.todolist.data.Task
-import com.example.todolist.data.TaskRepository
+//import com.example.todolist.data.TaskRepository
+import com.example.todolist.data.ToDoListTable
 import kotlinx.coroutines.launch
 
 class AddViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val dao = AppDatabase.getDatabase(application).taskDao()
-    private val repository = TaskRepository(dao)
+    private val todolistdao = AppDatabase.getDatabase(application).toDoListDao()
+    private val taskdao = AppDatabase.getDatabase(application).taskDao()
+    private val tagdao = AppDatabase.getDatabase(application).tagDao()
 
     private val _message = MutableLiveData<String?>()
     val message: LiveData<String?> = _message
@@ -18,16 +21,25 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
     private val _taskAdded = MutableLiveData<Boolean>()
     val taskAdded: LiveData<Boolean> = _taskAdded
 
-    fun addTask(title: String, tags: String, description: String) {
-        if (title.isEmpty()) {
-            _message.value = "Title should not be empty"
-            return
-        }
-
-        val task = Task(id = 0, title = title, tags = tags, description = description)
+    fun addTaskWithTags(title: String, tags: List<Tag>) {
         viewModelScope.launch {
-            repository.insert(task)
-            _taskAdded.postValue(true)
+            try {
+                val taskId = taskdao.insert(Task(title = title))
+                val tagIds = tags.map { tag ->
+                    val existingTag = tagdao.getTagByName(tag.tag)
+                    if (existingTag != null) {
+                        existingTag.tagId
+                    } else {
+                        tagdao.insertTag(tag)
+                    }
+                }
+                tagIds.forEach { tagId ->
+                    todolistdao.insert(ToDoListTable(entryId = taskId, tagId = tagId))
+                }
+                _taskAdded.value = true
+            } catch (e: Exception) {
+                _message.value = "Failed to add task: ${e.message}"
+            }
         }
     }
 

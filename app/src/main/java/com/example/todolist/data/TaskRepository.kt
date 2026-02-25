@@ -3,18 +3,18 @@ package com.example.todolist.data
 //import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-class TaskRepository(private val taskDao: TaskDao){
-    val allTasks: Flow<List<Task>> = taskDao.getAllTasks()
-    suspend fun insert(task:Task){
-        taskDao.insert(task)
+class TaskRepository(
+    private val toDoListDao: ToDoListDao
+) {
+    fun getAllTasks(): Flow<List<Task>> {
+        return toDoListDao.getAllTasks()
     }
+
     suspend fun delete(task: Task) {
-        taskDao.delete(task)
+        toDoListDao.delete(task)
     }
-    fun getTaskById(id: Int): Flow<Task> {
-        return taskDao.getTaskById(id)
-    }
+
     suspend fun clearAll() {
-        taskDao.deleteAllTasks()
+        toDoListDao.clearAll()
     }
 }

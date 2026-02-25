@@ -9,17 +9,16 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TaskDao {
+interface ToDoListDao {
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(toDoList: ToDoListTable)
+
     @Query("SELECT * FROM entries ORDER BY entryId DESC")
     fun getAllTasks(): Flow<List<Task>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(task: Task): Long
 
     @Delete
     suspend fun delete(task: Task)
 
     @Query("DELETE FROM entries")
     suspend fun clearAll()
-
 }
