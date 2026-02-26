@@ -31,6 +31,9 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding>(
         binding.urgentTag.setOnClickListener {
             onClick(it.id)
         }
+        binding.addTag.setOnClickListener {
+            onClick(it.id)
+        }
     }
 
     override fun observeViewModel() {
@@ -58,7 +61,8 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding>(
                     return
                 }
                 if (selectedTags.isEmpty()) {
-                    Toast.makeText(requireContext(), "Select at least one tag", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Select at least one tag", Toast.LENGTH_SHORT)
+                        .show()
                     return
                 }
                 viewModel.addTaskWithTags(title, selectedTags.toList())
@@ -88,6 +92,24 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding>(
                     selectedTags.add(Tag(tag = "Relax"))
                 } else {
                     selectedTags.remove(Tag(tag = "Relax"))
+                }
+            }
+
+            R.id.addTag -> {
+                val additionalTag = binding.newTag.text.toString()
+                if (additionalTag.isEmpty()) {
+                    Toast.makeText(requireContext(), "Enter Tag to be added!!", Toast.LENGTH_SHORT)
+                        .show()
+                    return
+                } else {
+                    selectedTags.add(Tag(tag = additionalTag))
+                    Toast.makeText(
+                        requireContext(),
+                        "$additionalTag Tag added!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.newTag.setText("")
+                    return
                 }
             }
         }

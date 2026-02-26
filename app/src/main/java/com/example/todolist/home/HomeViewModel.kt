@@ -9,23 +9,31 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
-    private val dao = AppDatabase.getDatabase(application).taskDao()
-    private val repository = TaskRepository(dao)
+    private val database = AppDatabase.getDatabase(application)
+
+    private val taskDao = database.taskDao()
+    private val tagDao = database.tagDao()
+
+    private val repository = TaskRepository(taskDao, tagDao)
     val tasks: LiveData<List<TaskWithTags>> =
         repository.taskwithTags.asLiveData()
+
     fun clearAll() {
         viewModelScope.launch {
             repository.clearAll()
+            repository.clearAllTag()
         }
     }
 
     fun delete(taskWithTags: TaskWithTags) {
         viewModelScope.launch {
             repository.delete(taskWithTags.task)
+            repository.tagDelete()
         }
     }
-    fun searchtask(str:String):Flow<List<TaskWithTags>>{
-        val searchtxt="$str%"
-        return dao.search(searchtxt)
+
+    fun searchtask(str: String): Flow<List<TaskWithTags>> {
+        val searchtxt = "$str%"
+        return taskDao.search(searchtxt)
     }
 }

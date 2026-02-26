@@ -17,4 +17,6 @@
     <string name="urgent">Urgent</string>
     <string name="work">Work</string>
     <string name="relax">Relax</string>
+    <string name="enter_additional_tag">Enter additional tag</string>
+    <string name="add_tag">Add Tag</string>
 </resources>

@@ -1,65 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/titleEdit"
-        android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="@string/enter_title"
-        android:inputType="text"
+        android:layout_marginBottom="40dp"
         android:autofillHints="none"
         android:gravity="center"
-        android:layout_marginBottom="40dp"/>
+        android:hint="@string/enter_title"
+        android:inputType="text"
+        android:minHeight="48dp" />
+
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/urgent"
             android:id="@+id/urgentTag"
-            android:background="@drawable/selected_tag"
-            android:textColor="@color/white"
-            android:layout_weight="1"/>
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/work"
-            android:background="@drawable/selected_tag"
-            android:textColor="@color/white"
-            android:id="@+id/workTag"
             android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:background="@drawable/selected_tag"
+            android:text="@string/urgent"
+            android:textColor="@color/white" />
+
         <Button
+            android:id="@+id/workTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/selected_tag"
+            android:text="@string/work"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/relaxTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/selected_tag"
             android:text="@string/relax"
-            android:id="@+id/relaxTag"
-            android:layout_weight="1"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/newTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="@string/enter_additional_tag"
+        android:inputType="text" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_tag"
+        android:id="@+id/addTag"
+        android:background="@color/enabled_blue"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/add"
         android:background="#4280EF"
+        android:text="@string/add"
         android:textColor="@color/white" />
 
 </LinearLayout>

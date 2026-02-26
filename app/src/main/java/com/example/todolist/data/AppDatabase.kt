@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 @Database(
     entities = [Task::class,
         Tag::class,
-        ToDoListTable::class], version = 3
+        ToDoListTable::class], version = 5
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
@@ -26,14 +26,6 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "task_database"
                 )
-                    .addCallback(object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            db.execSQL("INSERT INTO tags (tag) VALUES ('Urgent')")
-                            db.execSQL("INSERT INTO tags (tag) VALUES ('Work')")
-                            db.execSQL("INSERT INTO tags (tag) VALUES ('Relax')")
-                        }
-                    })
                     .build()
                 INSTANCE = instance
                 instance
