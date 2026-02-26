@@ -9,19 +9,8 @@
         android:name="com.example.todolist.home.HomeFragment"
         android:label="Home">
         <action
-            android:id="@+id/home_To_Detail"
-            app:destination="@id/detail_fragment" />
-        <action
             android:id="@+id/home_To_add"
             app:destination="@id/add_fragment"/>
-    </fragment>
-    <fragment
-        android:id="@+id/detail_fragment"
-        android:name="com.example.todolist.detail.DetailFragment"
-        android:label="Detail">
-        <argument
-            android:name="id"
-            app:argType="integer" />
     </fragment>
 <fragment
     android:id="@+id/add_fragment"

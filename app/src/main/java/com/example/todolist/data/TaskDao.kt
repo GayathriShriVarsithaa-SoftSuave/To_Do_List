@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 //import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
@@ -21,5 +22,9 @@ interface TaskDao {
 
     @Query("DELETE FROM entries")
     suspend fun clearAll()
+
+    @Transaction
+    @Query("SELECT * FROM entries ORDER BY entryId DESC")
+    fun getTaskswithTags(): Flow<List<TaskWithTags>>
 
 }

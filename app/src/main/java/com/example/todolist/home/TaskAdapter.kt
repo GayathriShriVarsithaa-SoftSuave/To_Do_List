@@ -10,10 +10,8 @@ import com.example.todolist.data.TaskWithTags
 import com.example.todolist.databinding.ItemTaskBinding
 
 class TaskAdapter(
-    private val onDeleteClick: (Task) -> Unit
-) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(DiffCallback()) {
-
-    private var taskWithTagsList: List<TaskWithTags> = emptyList()
+    private val onDeleteClick: (TaskWithTags) -> Unit
+) : ListAdapter<TaskWithTags, TaskAdapter.TaskViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ItemTaskBinding.inflate(
@@ -25,29 +23,35 @@ class TaskAdapter(
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val task = getItem(position)
-        val tags = taskWithTagsList.find { it.task.entryId == task.entryId }?.tags
-        holder.bind(task, tags)
+        val item = getItem(position)
+        holder.bind(item)
     }
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: Task, tags: List<com.example.todolist.data.Tag>?) {
-            binding.textTitle.text = task.title
-            binding.textTags.text = tags?.joinToString(", ") { it.tag } ?: ""
+        fun bind(item: TaskWithTags) {
+            binding.textTitle.text = item.task.title
+            binding.textTags.text =
+                item.tags.joinToString(", ") { it.tag }
 
             binding.deleteBtn.setOnClickListener {
-                onDeleteClick(task)
+                onDeleteClick(item)
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Task>() {
-        override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean =
-            oldItem.entryId == newItem.entryId
+    class DiffCallback : DiffUtil.ItemCallback<TaskWithTags>() {
+        override fun areItemsTheSame(
+            oldItem: TaskWithTags,
+            newItem: TaskWithTags
+        ): Boolean =
+            oldItem.task.entryId == newItem.task.entryId
 
-        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean =
+        override fun areContentsTheSame(
+            oldItem: TaskWithTags,
+            newItem: TaskWithTags
+        ): Boolean =
             oldItem == newItem
     }
 }

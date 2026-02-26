@@ -4,8 +4,9 @@ package com.example.todolist.data
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepository(
-    private val toDoListDao: ToDoListDao
+    private val toDoListDao: TaskDao
 ) {
+    val taskwithTags: Flow<List<TaskWithTags>> = toDoListDao.getTaskswithTags()
     fun getAllTasks(): Flow<List<Task>> {
         return toDoListDao.getAllTasks()
     }

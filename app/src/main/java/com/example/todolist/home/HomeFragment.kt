@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.R
 import com.example.todolist.base.BaseFragment
+//import com.example.todolist.data.TaskWithTags
 //import com.example.todolist.data.Task
 import com.example.todolist.databinding.FragmentHomeBinding
 
@@ -16,8 +17,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private lateinit var adapter: TaskAdapter
 
     override fun setupViews() {
-        adapter = TaskAdapter { task ->
-            viewModel.delete(task)
+        adapter = TaskAdapter { taskWithTags ->
+            viewModel.delete(taskWithTags)
         }
         binding.recyclerViewTask.layoutManager =
             LinearLayoutManager(requireContext())
@@ -41,6 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             R.id.addButton -> {
                 findNavController().navigate(R.id.home_To_add)
             }
+
             R.id.clearAll -> {
                 viewModel.clearAll()
             }
