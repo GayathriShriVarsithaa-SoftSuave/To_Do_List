@@ -2,6 +2,7 @@ package com.example.todolist.home
 
 //import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.R
@@ -9,6 +10,8 @@ import com.example.todolist.base.BaseFragment
 //import com.example.todolist.data.TaskWithTags
 //import com.example.todolist.data.Task
 import com.example.todolist.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
+import androidx.core.widget.addTextChangedListener
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
@@ -28,6 +31,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
         binding.clearAll.setOnClickListener {
             onClick(it.id)
+        }
+        binding.searchBar.addTextChangedListener { text ->
+            val searchtext = "${text.toString()}%"
+            lifecycleScope.launch {
+                viewModel.searchtask(searchtext).collect { taskList ->
+                    adapter.submitList(taskList)
+                }
+            }
         }
     }
 

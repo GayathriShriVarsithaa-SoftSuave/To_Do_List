@@ -58,8 +58,7 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding>(
                     return
                 }
                 if (selectedTags.isEmpty()) {
-                    Toast.makeText(requireContext(), "Select at least one tag", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), "Select at least one tag", Toast.LENGTH_SHORT).show()
                     return
                 }
                 viewModel.addTaskWithTags(title, selectedTags.toList())

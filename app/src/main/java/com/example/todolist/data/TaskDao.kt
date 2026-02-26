@@ -27,4 +27,13 @@ interface TaskDao {
     @Query("SELECT * FROM entries ORDER BY entryId DESC")
     fun getTaskswithTags(): Flow<List<TaskWithTags>>
 
+    @Transaction
+    @Query(
+        """SELECT DISTINCT entries.* FROM entries 
+        LEFT JOIN to_do_list_table ON entries.entryId=to_do_list_table.entryId 
+LEFT JOIN tags ON tags.tagId=to_do_list_table.tagId 
+WHERE entries.title LIKE :searchtext OR tags.tag LIKE :searchtext 
+ORDER BY entryId DESC"""
+    )
+    fun search(searchtext: String): Flow<List<TaskWithTags>>
 }
