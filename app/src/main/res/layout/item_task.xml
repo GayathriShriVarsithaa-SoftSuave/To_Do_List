@@ -28,7 +28,9 @@
             android:text="@string/delete"
             android:textSize="12sp"
             android:background="#FF0000"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
 
     </LinearLayout>
 

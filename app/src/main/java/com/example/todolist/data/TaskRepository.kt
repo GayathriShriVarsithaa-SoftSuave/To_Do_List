@@ -3,22 +3,24 @@ package com.example.todolist.data
 //import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-class TaskRepository(private val taskDao: TaskDao){
-    val allTasks: Flow<List<Task>> = taskDao.getAllTasks()
-    suspend fun insert(task:Task){
-        taskDao.insert(task)
-    }
-    fun searchTasks(query: String):Flow<List<Task>>{
-        return taskDao.searchTasks(query)
-    }
+class TaskRepository(
+    private val taskDao: TaskDao, private val tagDao: TagDao
+) {
+    val taskwithTags: Flow<List<TaskWithTags>> = taskDao.getTaskswithTags()
+
     suspend fun delete(task: Task) {
         taskDao.delete(task)
     }
-    fun getTaskById(id: Int): Flow<Task> {
-        return taskDao.getTaskById(id)
-    }
+
     suspend fun clearAll() {
-        taskDao.deleteAllTasks()
+        taskDao.clearAll()
     }
 
+    suspend fun clearAllTag() {
+        tagDao.clearAll()
+    }
+
+    suspend fun tagDelete() {
+        tagDao.tagdelete()
+    }
 }

@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.data.Task
+import com.example.todolist.data.TaskWithTags
 import com.example.todolist.databinding.ItemTaskBinding
 
 class TaskAdapter(
-    private val onItemClick: ((Task) -> Unit)? = null,
-    private val onDeleteClick: ((Task) -> Unit)? = null
-) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(DiffCallback()) {
+    private val onDeleteClick: (TaskWithTags) -> Unit
+) : ListAdapter<TaskWithTags, TaskAdapter.TaskViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ItemTaskBinding.inflate(
@@ -23,35 +23,35 @@ class TaskAdapter(
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
     }
 
-    inner class TaskViewHolder(
-        private val binding: ItemTaskBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    inner class TaskViewHolder(private val binding: ItemTaskBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: Task) {
-
-            binding.textTitle.text = task.title
-            binding.textTags.text = task.tags
-
-            binding.root.setOnClickListener {
-                onItemClick?.invoke(task)
-            }
+        fun bind(item: TaskWithTags) {
+            binding.textTitle.text = item.task.title
+            binding.textTags.text =
+                item.tags.joinToString(", ") { it.tag }
 
             binding.deleteBtn.setOnClickListener {
-                onDeleteClick?.invoke(task)
+                onDeleteClick(item)
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Task>() {
-        override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
-            return oldItem.id == newItem.id
-        }
+    class DiffCallback : DiffUtil.ItemCallback<TaskWithTags>() {
+        override fun areItemsTheSame(
+            oldItem: TaskWithTags,
+            newItem: TaskWithTags
+        ): Boolean =
+            oldItem.task.entryId == newItem.task.entryId
 
-        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(
+            oldItem: TaskWithTags,
+            newItem: TaskWithTags
+        ): Boolean =
+            oldItem == newItem
     }
 }

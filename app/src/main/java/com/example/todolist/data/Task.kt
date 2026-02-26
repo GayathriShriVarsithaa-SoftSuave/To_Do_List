@@ -1,13 +1,17 @@
 package com.example.todolist.data
 
+//import androidx.room.Embedded
 import androidx.room.Entity
+//import androidx.room.ForeignKey
+//import androidx.room.Junction
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tasks")
-data class Task (
+//import androidx.room.Relation
+
+@Entity(tableName = "entries")
+data class Task(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    val title:String,
-    val tags:String,
-    val description: String
+    val entryId: Long = 0,
+    val title: String
 )
+
